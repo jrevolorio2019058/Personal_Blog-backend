@@ -8,6 +8,7 @@ import morgan from 'morgan';
 
 import { dbConnection } from './mongo.js';
 
+import Credentials from '../src/credentials/credentials.model.js';
 import User from '../src/user/user.model.js';
 
 class Server{
@@ -43,6 +44,17 @@ class Server{
             defaultUser.password = bcryptjs.hashSync(defaultUser.password, salt);
 
             await defaultUser.save();
+
+            const ADMIN_ROLE = new Credentials({
+                role: "ADMIN_ROLE"
+            })
+
+            const USER_ROLE = new Credentials({
+                role: "USER_ROLE"
+            })
+
+            await ADMIN_ROLE.save();
+            await USER_ROLE.save();
 
             console.log('Default Creadentials have been created')
 
