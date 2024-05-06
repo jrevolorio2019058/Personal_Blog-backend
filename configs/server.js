@@ -11,16 +11,20 @@ import { dbConnection } from './mongo.js';
 import Credentials from '../src/credentials/credentials.model.js';
 import User from '../src/user/user.model.js';
 
+import authRoutes from '../src/auth/auth.routes.js';
+
 class Server{
 
     constructor() {
         
         this.app = express();
         this.port = process.env.PORT;
+        this.authPath = '/personal-blog/v1/auth'
 
         this.middlewares();
         this.connectDB();
         this.defaultCredential();
+        this.routes();
 
     }
 
@@ -79,6 +83,12 @@ class Server{
     async connectDB() {
         
         await dbConnection();
+
+    }
+
+    routes() {
+        
+        this.app.use(this.authPath, authRoutes);
 
     }
 
