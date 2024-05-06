@@ -48,7 +48,7 @@ class Server{
 
         } else {
             
-            console.log('Error: The Default Credentials was already created')
+            console.log('Warning: The Default Credentials was already created')
 
         }
         
