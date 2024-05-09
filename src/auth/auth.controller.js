@@ -80,3 +80,19 @@ export const login = async (req, res) => {
     });
   }
 }
+
+export const register = async (req, res) => {
+  
+    const { name, username, email, password } = req.body;
+    const user = new User({ name, username, email, password });
+  
+  
+    const salt = bcryptjs.genSaltSync();
+    user.password = bcryptjs.hashSync(password, salt);
+  
+    await user.save();
+  
+    res.status(200).json({
+      msg: `${user.name} your user with username ${user.username} was created successful`
+    });
+  }
