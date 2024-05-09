@@ -1,4 +1,6 @@
-export const existentEmail = async () => {
+import User from '../user/user.model.js';
+
+export const existentEmail = async (email = '') => {
     const existEmail = await User.findOne({ email: email });
 
     if (existEmail) {
@@ -6,7 +8,7 @@ export const existentEmail = async () => {
     }
 }
 
-export const existentUsername = async () => {
+export const existentUsername = async (username = '') => {
     const existUsername = await User.findOne({ username: username });
 
     if (existUsername) {

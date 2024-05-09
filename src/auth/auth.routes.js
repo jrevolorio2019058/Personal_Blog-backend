@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { validateFields } from "../middlewares/validate-fields.js";
+import { validationPassword } from "../helpers/data-validator.js";
 import { existentEmail, existentUsername } from "../helpers/db-validator.js";
-import {validationPassword} from "../helpers/data-validator.js";
+import { validateFields } from "../middlewares/validate-fields.js";
 import { login, register } from "./auth.controller.js";
 
 const router = Router();
@@ -13,7 +13,7 @@ router.post(
         check('usernameOrEmail', "It's obligatory a username or a email").not().isEmpty(),
         check('password', 'Password is obligatory').not().isEmpty(),
         validateFields,
-    ],login
+    ], login
 );
 
 router.post(
@@ -29,8 +29,7 @@ router.post(
         check("email", "This is not a valid email.").isEmail(),
         check("email").custom(existentEmail),
         validateFields,
-    ],
-    register
+    ], register
 );
 
 export default router;
