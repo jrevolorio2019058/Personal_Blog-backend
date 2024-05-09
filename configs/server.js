@@ -8,15 +8,17 @@ import morgan from 'morgan';
 
 import { dbConnection } from './mongo.js';
 
+import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
+
 import Credentials from '../src/credentials/credentials.model.js';
 import User from '../src/user/user.model.js';
 
 import authRoutes from '../src/auth/auth.routes.js';
 
-class Server{
+class Server {
 
     constructor() {
-        
+
         this.app = express();
         this.port = process.env.PORT;
         this.authPath = '/personal-blog/v1/auth'
@@ -29,11 +31,11 @@ class Server{
     }
 
     async defaultCredential() {
-        
+
         const defaultCredential = await User.findOne({ username: "admin" });
 
         if (!defaultCredential) {
-            
+
             const defaultUser = new User({
 
                 name: "admin",
@@ -63,16 +65,17 @@ class Server{
             console.log('Default Creadentials have been created')
 
         } else {
-            
+
             console.log('Warning: The Default Credentials was already created')
 
         }
-        
+
     }
 
     middlewares() {
-        
-        this.app.use(express.urlencoded({extended:false}));
+
+        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(apiLimiter);
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(helmet());
@@ -81,21 +84,21 @@ class Server{
     }
 
     async connectDB() {
-        
+
         await dbConnection();
 
     }
 
     routes() {
-        
+
         this.app.use(this.authPath, authRoutes);
 
     }
 
     listen() {
-        
+
         this.app.listen(this.port, () => {
-            
+
             console.log('Server running on port: ', this.port)
 
         })
