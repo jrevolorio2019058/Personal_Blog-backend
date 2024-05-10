@@ -83,8 +83,8 @@ export const login = async (req, res) => {
 
 export const register = async (req, res) => {
   
-    const { name, username, email, password } = req.body;
-    const user = new User({ name, username, email, password });
+    const { name, username,  password, email } = req.body;
+    const user = new User({ name, username, password,  email});
   
   
     const salt = bcryptjs.genSaltSync();
