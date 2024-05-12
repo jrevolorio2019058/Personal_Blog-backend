@@ -13,6 +13,7 @@ import Credentials from '../src/credentials/credentials.model.js';
 import User from '../src/user/user.model.js';
 
 import authRoutes from '../src/auth/auth.routes.js';
+import postRoutes from '../src/post/post.routes.js';
 
 class Server {
 
@@ -21,6 +22,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.authPath = '/personal-blog/v1/auth'
+        this.postPath = '/personal-blog/v1/post'
 
         this.middlewares();
         this.connectDB();
@@ -91,6 +93,7 @@ class Server {
     routes() {
 
         this.app.use(this.authPath, authRoutes);
+        this.app.use(this.postPath, postRoutes);
 
     }
 

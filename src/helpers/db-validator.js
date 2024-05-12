@@ -15,3 +15,26 @@ export const existentUsername = async (username = '') => {
         throw new Error(`The Username ${username} was register`);
     }
 }
+
+export const existenUser = async (nameComments= []) => {
+
+    for (const integrant of nameComments) {
+
+        if(integrant == ""){
+
+        }else if(integrant.includes('@')){
+
+            throw new Error(`You can't add a user with an email.`);
+
+        }else{
+
+            const existUsername = await User.findOne({ username: integrant });
+
+            if (!existUsername) {
+                throw new Error(`We dont find a username with the name ${integrant}.`);
+            }
+            
+        }
+    }
+
+}
