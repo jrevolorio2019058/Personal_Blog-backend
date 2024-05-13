@@ -24,3 +24,22 @@ export const addPost = async (req, res) => {
     });
 
 }
+
+export const listPost = async (req, res = response) => {
+
+    const { limit, from } = req.query;
+    const query = { };
+
+    const [total, post] = await Promise.all([
+        Post.countDocuments(query),
+        Post.find(query)
+            .skip(Number(from))
+            .limit(Number(limit))
+    ]);
+
+    res.status(200).json({
+        total,
+        post
+    });
+
+}

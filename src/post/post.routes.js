@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { check } from "express-validator";
-// import { validationPassword } from "../helpers/data-validator.js";
 import { existenUser } from "../helpers/db-validator.js";
 import {validateJWT} from "../middlewares/validate-jwt.js"
 import { validateFields} from "../middlewares/validate-fields.js";
-import { addPost } from "./post.controller.js";
+import { addPost, listPost } from "./post.controller.js";
 
 const router = Router();
+
+router.get('/', listPost);
 
 router.post(
     '/',
