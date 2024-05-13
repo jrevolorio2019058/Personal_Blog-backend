@@ -13,7 +13,13 @@
 					"name": "login",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"usernameOrEmail\": \"admin@gmail.com\",\r\n    \"password\": \"Admin10!\"\r\n}",
@@ -38,6 +44,169 @@
 								"v1",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Domingo\",\r\n    \"username\": \"domingo\",\r\n    \"password\": \"12Abril2005!\",\r\n    \"email\": \"domingo@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3002/personal-blog/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"personal-blog",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "add Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjM5NWQ0ZWZlM2MyMGYwOWM0NGNhNzEiLCJpYXQiOjE3MTU1NzU0MjYsImV4cCI6MTcxNTU4NjIyNn0.Q5jjoqIZHtFq2Nxp5LnpiSgdToGrwQPMPjTWvh1tXEM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postName\": \"Product Storage\",\r\n    \"postDescription\": \"This is the Proyecto of Product Storage\",\r\n    \"proyectLink\": [\"https://github.com/oskcarsv/products-storage-front.git\", \"https://github.com/oskcarsv/products-storage-back.git\"],\r\n    \"nameComments\": [\"jorge\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3002/personal-blog/v1/post",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"personal-blog",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3002/personal-blog/v1/post",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"personal-blog",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "add Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creatorComment\": \"Fernando\",\r\n    \"titleComment\": \"Amazing Program\",\r\n    \"descriptionComment\": \"This program was increible for my company, Thanks!\",\r\n    \"postName\": \"Product Storage\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3002/personal-blog/v1/comment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"personal-blog",
+								"v1",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3002/personal-blog/v1/comment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"personal-blog",
+								"v1",
+								"comment"
 							]
 						}
 					},

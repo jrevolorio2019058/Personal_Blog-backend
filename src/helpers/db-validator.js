@@ -1,5 +1,7 @@
 import User from '../user/user.model.js';
 
+import Post from '../post/post.model.js';
+
 export const existentEmail = async (email = '') => {
     const existEmail = await User.findOne({ email: email });
 
@@ -13,6 +15,14 @@ export const existentUsername = async (username = '') => {
 
     if (existUsername) {
         throw new Error(`The Username ${username} was register`);
+    }
+}
+
+export const existentPost = async (postName = '') => {
+    const existPost = await Post.findOne({ postName: postName });
+
+    if (!existPost) {
+        throw new Error(`The Post ${postName} not exist in DB.`);
     }
 }
 

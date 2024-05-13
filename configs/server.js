@@ -8,6 +8,8 @@ import morgan from 'morgan';
 
 import { dbConnection } from './mongo.js';
 
+import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
+
 
 import Credentials from '../src/credentials/credentials.model.js';
 import User from '../src/user/user.model.js';
@@ -15,6 +17,7 @@ import Post from '../src/post/post.model.js';
 
 import authRoutes from '../src/auth/auth.routes.js';
 import postRoutes from '../src/post/post.routes.js';
+import commentRoutes from '../src/comment/comment.routes.js';
 
 class Server {
 
@@ -24,6 +27,7 @@ class Server {
         this.port = process.env.PORT;
         this.authPath = '/personal-blog/v1/auth'
         this.postPath = '/personal-blog/v1/post'
+        this.commentPath = '/personal-blog/v1/comment'
 
         this.middlewares();
         this.connectDB();
@@ -168,7 +172,7 @@ class Server {
     middlewares() {
 
         this.app.use(express.urlencoded({ extended: false }));
-        // this.app.use(apiLimiter);
+        this.app.use(apiLimiter);
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(helmet());
@@ -186,6 +190,7 @@ class Server {
 
         this.app.use(this.authPath, authRoutes);
         this.app.use(this.postPath, postRoutes);
+        this.app.use(this.commentPath, commentRoutes);
 
     }
 
